@@ -1080,3 +1080,5 @@ Para mover los elementos posiconados se activan las propiedades :
 
 Las propiedades de top y eft van a tener preferencia por sobre botton y right
 repectivamente 
+
+Estas 5 propiedades no funcionana con el valor de static
