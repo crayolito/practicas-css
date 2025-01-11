@@ -1,0 +1,648 @@
+/* ==========================================
+   1. SELECTORES DE HIJOS
+   ========================================== 
+   Los selectores de hijos nos ayudan a elegir elementos que están
+   dentro de otros elementos. Es como buscar cosas dentro de cajas. */
+
+/* SELECTOR DE HIJOS DIRECTOS (>)
+   - Solo afecta a los elementos que están "justo dentro" del padre
+   - Es como elegir solo los hijos, no los nietos
+   
+   Ejemplo: 
+   <ul class="hijos-directos">
+     <li>Este SÍ se pinta ✅</li>
+     <div>
+       <li>Este NO se pinta ❌</li>
+     </div>
+   </ul> */
+.hijos-directos>li {
+    background-color: aquamarine;
+}
+
+/* SELECTOR DE DESCENDIENTES (espacio)
+   - Afecta a TODOS los elementos que están dentro, no importa qué tan profundo
+   - Es como elegir hijos, nietos, bisnietos, etc.
+   
+   Ejemplo:
+   <div class="hijos-descendientes">
+     <b>Este SÍ se pinta ✅</b>
+     <p>
+       <b>Este también se pinta ✅</b>
+     </p>
+   </div> */
+.hijos-descendientes b {
+    background-color: rebeccapurple
+}
+
+/* ==========================================
+   2. SELECTORES DE HERMANOS
+   ========================================== 
+   Los selectores de hermanos nos ayudan a elegir elementos que están
+   al mismo nivel, uno después de otro. Como elegir hermanos en una familia. */
+
+/* SELECTOR DE HERMANOS GENERALES (~)
+   - Afecta a TODOS los elementos hermanos que vienen DESPUÉS
+   - Es como decir "todos tus hermanos menores"
+   
+   Ejemplo:
+   <ul>
+     <li class="hermanos-general">Punto de partida</li>
+     <li>Este SÍ se pinta ✅</li>
+     <li>Este también ✅</li>
+     <li>Y este también ✅</li>
+   </ul> */
+.hermanos-general~li {
+    background-color: yellowgreen;
+}
+
+/* SELECTOR DE HERMANO ADYACENTE (+)
+   - Solo afecta al elemento que viene JUSTO DESPUÉS
+   - Es como decir "solo tu siguiente hermano"
+   
+   Ejemplo:
+   <ul>
+     <li class="hermanos-adyacentes">Punto de partida</li>
+     <li>Este SÍ se pinta ✅</li>
+     <li>Este ya NO se pinta ❌</li>
+   </ul> */
+.hermanos-adyacentes+li {
+    background-color: yellow;
+}
+
+/* ==========================================
+   3. SELECTORES DE ATRIBUTOS
+   ========================================== 
+   Los selectores de atributos nos permiten elegir elementos basándonos
+   en sus atributos HTML (como href, class, id, etc.) */
+
+/* TIENE EL ATRIBUTO [attr]
+   - Selecciona elementos que simplemente tienen el atributo, sin importar su valor
+   
+   Ejemplo: Todos los enlaces que tengan href
+   <a href="...">Este SÍ ✅</a>
+   <a>Este NO ❌</a> */
+.selectores-atributos a[href] {
+    color: chocolate;
+}
+
+/* ATRIBUTO EXACTO [attr="valor"]
+   - El atributo debe ser EXACTAMENTE igual al valor
+   
+   Ejemplo: Enlaces que abren en nueva pestaña
+   <a target="_blank">Este SÍ ✅</a>
+   <a target="otro">Este NO ❌</a> */
+.selectores-atributos a[target="_blank"] {
+    font-weight: bold;
+}
+
+/* CONTIENE [attr*="valor"]
+   - El atributo contiene el texto en CUALQUIER parte
+   
+   Ejemplo: Enlaces que contienen "jonmircha" en cualquier parte
+   <a href="jonmircha.com">Este SÍ ✅</a>
+   <a href="www.jonmircha.es">Este también ✅</a> */
+.selectores-atributos a[href*="jonmircha"] {
+    font-size: 24px;
+    color: black;
+}
+
+/* EMPIEZA CON [attr^="valor"]
+   - El atributo debe EMPEZAR con el valor
+   
+   Ejemplo: Enlaces que empiezan con http
+   <a href="http://...">Este SÍ ✅</a>
+   <a href="www...">Este NO ❌</a> */
+.selectores-atributos a[href^="http"] {
+    text-decoration: none;
+}
+
+/* TERMINA CON [attr$="valor"]
+   - El atributo debe TERMINAR con el valor
+   
+   Ejemplo: Enlaces que terminan en .com
+   <a href="sitio.com">Este SÍ ✅</a>
+   <a href="sitio.net">Este NO ❌</a> */
+.selectores-atributos a[href$=".com"] {
+    color: red;
+}
+
+/* PALABRA COMPLETA [attr~="valor"]
+   - Busca el valor como palabra separada
+   
+   Ejemplo: Elementos con la clase exacta "cursos"
+   <a class="cursos">Este SÍ ✅</a>
+   <a class="mis-cursos">Este NO ❌</a> */
+.selectores-atributos a[class~="cursos"] {
+    background-color: slateblue;
+}
+
+/* VALOR O PREFIJO [attr|="valor"]
+   - Coincide con el valor exacto O con el valor seguido de guión
+   
+   Ejemplo: Elementos con class="menu" o que empiezan con "menu-"
+   <a class="menu">Este SÍ ✅</a>
+   <a class="menu-item">Este SÍ ✅</a>
+   <a class="menuitem">Este NO ❌</a> */
+.selectores-atributos a[class|="menu"] {
+    background-color: aqua;
+    font-style: italic;
+}
+
+/* https://developer.mozilla.org/es/docs/Web/CSS/Pseudo-classes */
+/* ==========================================
+   4. PSEUDOCLASES DE FORMULARIOS
+   ========================================== 
+   Las pseudoclases de formularios nos ayudan a dar estilos a los campos
+   de formulario según su estado */
+
+/* CAMPO REQUERIDO (:required)
+   - Aplica a campos que son obligatorios
+   <input required> */
+.form-pseudoclases *:required {
+    border-color: yellow;
+}
+
+/* CAMPO VÁLIDO (:valid)
+   - Aplica cuando el campo cumple con las reglas
+   - Por ejemplo, un email bien escrito */
+.form-pseudoclases *:valid {
+    border-color: green;
+}
+
+/* CAMPO INVÁLIDO (:invalid)
+   - Aplica cuando el campo NO cumple con las reglas
+   - Por ejemplo, un email mal escrito */
+.form-pseudoclases *:invalid {
+    border-color: red;
+}
+
+/* CAMPO CON FOCO (:focus)
+   - Aplica cuando el usuario está escribiendo/seleccionando el campo */
+.form-pseudoclases *:focus {
+    border-color: blue;
+}
+
+/* CAMPO DESHABILITADO (:disabled)
+   - Aplica a campos que no se pueden usar
+   <input disabled> */
+.form-pseudoclases *:disabled {
+    background-color: gray;
+}
+
+/* ==========================================
+   5. PSEUDOCLASES DE ENLACES Y ELEMENTOS
+   ========================================== */
+
+/* ENLACE VISITADO (:visited)
+   - Cambia el estilo de los enlaces que ya visitaste */
+.menu-pseudoclases a:visited {
+    color: purple;
+}
+
+/* MOUSE ENCIMA (:hover)
+   - Se aplica cuando pasas el mouse por encima */
+.menu-pseudoclases a:hover {
+    color: red;
+}
+
+/* ELEMENTO OBJETIVO (:target)
+   - Se aplica al elemento al que acabas de llegar por un enlace interno
+   - Por ejemplo, cuando haces clic en #seccion-1 */
+#temario-css:target {
+    background-color: yellow;
+    color: black;
+}
+
+/* ==========================================
+   6. PSEUDOCLASES DE POSICIÓN
+   ========================================== 
+   Nos ayudan a seleccionar elementos según su posición en una lista */
+
+/* ÚLTIMO HIJO (:last-child)
+   - Selecciona el último elemento */
+.lista-pseudoclases li:last-child {
+    background-color: crimson;
+}
+
+/* PRIMER HIJO (:first-child)
+   - Selecciona el primer elemento */
+.lista-pseudoclases li:first-child {
+    background-color: aquamarine;
+}
+
+/* HIJO ESPECÍFICO (:nth-child())
+   - Selecciona elementos según su posición
+   - Puede usar números (2), fórmulas (2n), odd (impares) o even (pares) */
+.lista-pseudoclases li:nth-child(2) {
+    /* Segundo elemento */
+    background-color: burlywood;
+}
+
+.lista-pseudoclases li:nth-child(2n) {
+    /* Cada dos elementos */
+    font-size: 40px;
+}
+
+.lista-pseudoclases li:nth-child(4n) {
+    /* Cada cuatro elementos */
+    font-weight: bold;
+}
+
+.lista-pseudoclases li:nth-child(odd) {
+    /* Elementos impares */
+    color: blue;
+}
+
+.lista-pseudoclases li:nth-child(even) {
+    /* Elementos pares */
+    color: blue;
+}
+
+/* ==========================================
+   7. PSEUDOCLASES DE TIPO
+   ========================================== 
+   Similar a las de posición, pero solo cuenta elementos del mismo tipo */
+
+/* PRIMER ELEMENTO DE SU TIPO */
+.articulo-pseudoclases p:first-of-type {
+    color: green;
+}
+
+/* ÚLTIMO ELEMENTO DE SU TIPO */
+.articulo-pseudoclases p:last-of-type {
+    color: red;
+}
+
+/* TERCER ELEMENTO DE SU TIPO */
+.articulo-pseudoclases p:nth-of-type(3) {
+    color: blue;
+}
+
+/* NEGACIÓN (:not())
+   - Selecciona todo EXCEPTO lo que está entre paréntesis */
+.articulo-pseudoclases *:not(p) {
+    background-color: chocolate;
+}
+
+/* ==========================================
+   PSEUDOELEMENTOS EN CSS
+   ========================================== 
+   Los pseudoelementos nos permiten añadir contenido o estilos a partes
+   específicas de un elemento. Se escriben con DOS dos puntos (::)
+   a diferencia de las pseudoclases que usan solo uno (:) */
+
+/* ==========================================
+   1. PSEUDOELEMENTOS ::before y ::after
+   ========================================== 
+   Estos pseudoelementos nos permiten añadir contenido ANTES o DESPUÉS
+   del contenido principal del elemento.
+   
+   IMPORTANTE: Siempre necesitan la propiedad 'content' para funcionar */
+
+/* ::before - Añade contenido AL INICIO del elemento
+   Ejemplo: <div class="saga-geminis">Saga de Géminis</div>
+   Resultado: 💀 Saga de Géminis */
+.saga-geminis::before {
+    content: "💀";
+    /* Sin content, el ::before no aparecería */
+}
+
+/* ::after - Añade contenido AL FINAL del elemento
+   Ejemplo: <div class="saga-geminis">Saga de Géminis</div>
+   Resultado: Saga de Géminis 🔥 */
+.saga-geminis::after {
+    content: "🔥";
+}
+
+/* Ejemplo práctico: Añadir símbolos de moneda
+   <div class="saga-precio">99.99</div>
+   Resultado: $💰 99.99 USB */
+.saga-precio::before {
+    content: "$💰";
+    font-weight: bold;
+}
+
+.saga-precio::after {
+    content: "USB";
+    font-weight: bold;
+}
+
+/* ==========================================
+   2. PSEUDOELEMENTOS DE TEXTO
+   ========================================== */
+
+/* ::first-letter - Estiliza la PRIMERA LETRA del texto
+   Muy útil para crear letras capitulares o efectos decorativos
+   
+   Ejemplo:
+   <p class="p-pseudoelementos">Este es un párrafo...</p>
+   Resultado: La 'E' aparecerá más grande y en negrita */
+.p-pseudoelementos::first-letter {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+/* ::first-line - Estiliza la PRIMERA LÍNEA del texto
+   La primera línea se ajusta automáticamente según el ancho del contenedor
+   
+   Ejemplo:
+   <p class="p-pseudoelementos">Primera línea...\nSegunda línea...</p>
+   Resultado: Solo la primera línea será de color coral */
+.p-pseudoelementos::first-line {
+    color: coral;
+}
+
+/* ::selection - Estiliza el texto cuando el usuario lo SELECCIONA
+   Afecta al color del texto y fondo cuando el usuario selecciona con el mouse
+   
+   Ejemplo: Al seleccionar el texto con el mouse:
+   - El texto se verá en verde limón
+   - El fondo de la selección será negro */
+.p-pseudoelementos::selection {
+    color: greenyellow;
+    background-color: black;
+}
+
+/* ==========================================
+   3. PSEUDOELEMENTOS DE FORMULARIO
+   ========================================== */
+
+/* ::placeholder - Estiliza el texto placeholder de los inputs
+   El placeholder es el texto que aparece antes de que el usuario escriba
+   
+   Ejemplo:
+   <input class="input-pseudoelementos" placeholder="Escribe aquí...">
+   Resultado: El texto "Escribe aquí..." aparecerá en rojo y cursiva */
+.input-pseudoelementos::placeholder {
+    color: red;
+    font-style: italic;
+}
+
+/* ==========================================
+   NOTAS IMPORTANTES SOBRE PSEUDOELEMENTOS
+   ========================================== 
+   1. Los pseudoelementos usan DOS dos puntos (::) aunque también funcionan
+      con uno solo (:) por compatibilidad con versiones antiguas
+   
+   2. ::before y ::after SIEMPRE necesitan la propiedad 'content'
+   
+   3. ::before y ::after son elementos en línea por defecto
+   
+   4. Pueden usarse para crear efectos decorativos sin modificar el HTML
+   
+   5. Son muy útiles para:
+      - Añadir iconos
+      - Crear diseños decorativos
+      - Agregar contenido dinámico
+      - Mejorar la tipografía */
+
+/* Agrupar Selectores */
+.form-agrupar-selectores input[type="text"],
+.form-agrupar-selectores input[type="email"],
+.form-agrupar-selectores textarea {
+    border-color: yellow;
+    border-width: 2px;
+    border-style: dashed;
+    background-color: black;
+    font-size: 20px;
+    display: block;
+    width: 300px;
+}
+
+/* ==========================================
+   ALGORITMO DE CSS
+   ========================================== 
+   El algoritmo de CSS es fundamental para entender cómo el navegador 
+   aplica los estilos al HTML. Se compone de tres conceptos principales:
+   
+   1. La Cascada
+   2. La Especificidad
+   3. La Herencia */
+
+
+/* ==========================================
+   1. LA CASCADA
+   ========================================== 
+   Es el mecanismo que usa el navegador para decidir qué estilos aplicar.
+   Sigue este orden de prioridad:
+
+   1) Origen del código (de menor a mayor prioridad):
+      - User Agent (estilos predeterminados del navegador)
+      - Personalizaciones del usuario
+      - Estilos del autor (tu código CSS)
+   
+   2) Especificidad del selector (ver siguiente sección)
+   
+   3) Orden de aparición (el último código escrito gana) */
+
+
+/* ==========================================
+   2. LA ESPECIFICIDAD
+   ========================================== 
+   Es el peso o importancia que tiene cada selector.
+   Se calcula usando 4 números: A,B,C,D
+   
+   Donde:
+   A (1,0,0,0) = Estilos en línea (style="")
+   B (0,1,0,0) = IDs (#elemento)
+   C (0,0,1,0) = Clases (.elemento), atributos y pseudoclases
+   D (0,0,0,1) = Etiquetas y pseudoelementos
+   
+   !important = Rompe las reglas de especificidad */
+
+
+/* ==========================================
+   EJEMPLOS PRÁCTICOS DE ESPECIFICIDAD
+   ========================================== 
+   A continuación veremos ejemplos con diferentes niveles de especificidad.
+   El color de fondo que se aplica dependerá de la especificidad del selector. */
+
+/* Especificidad: 0,1,1,1 (1 ID + 1 clase + 1 etiqueta) */
+blockquote#cita-marco.cita-marco {
+    background-color: antiquewhite;
+}
+
+/* Especificidad: 0,0,0,1 (solo etiqueta) */
+blockquote {
+    background-color: blueviolet;
+}
+
+/* Especificidad: 0,1,0,0 (solo ID) */
+#cita-marco {
+    background-color: aquamarine;
+}
+
+/* Especificidad: 0,0,1,1 (1 clase + 1 etiqueta) */
+blockquote.cita-marco {
+    background-color: blue;
+}
+
+/* Especificidad: 0,0,1,0 (solo clase) */
+.cita-marco {
+    background-color: brown;
+}
+
+/* Especificidad: !important (rompe la especificidad) 
+   Este estilo ganará sin importar los otros selectores */
+.cita-marco {
+    background-color: cadetblue !important;
+}
+
+/* Especificidad: 0,1,0,1 (1 ID + 1 etiqueta) */
+blockquote#cita-marco {
+    background-color: lightsalmon;
+}
+
+/* !important sobrescribe cualquier otra regla */
+.cita-marco {
+    background-color: lightseagreen !important;
+}
+
+/* ==========================================
+   RESUMEN DE ESTE EJEMPLO
+   ========================================== 
+   
+   Si aplicamos estos estilos a:
+   <blockquote id="cita-marco" class="cita-marco">Texto</blockquote>
+
+   El color final será lightseagreen porque:
+   
+   1. Tiene !important que rompe la especificidad
+   2. Al haber dos reglas con !important, gana la última en aparecer
+   
+   Sin los !important, el orden de especificidad sería:
+   
+   1. blockquote#cita-marco.cita-marco (0,1,1,1)
+   2. blockquote#cita-marco (0,1,0,1)
+   3. #cita-marco (0,1,0,0)
+   4. blockquote.cita-marco (0,0,1,1)
+   5. .cita-marco (0,0,1,0)
+   6. blockquote (0,0,0,1)
+
+   CONSEJO: Evita usar !important cuando sea posible, ya que hace 
+   el código más difícil de mantener. Es mejor usar selectores
+   más específicos. */
+
+/* ==========================================
+   LA HERENCIA EN CSS
+   ========================================== 
+   https://web.dev/learn/css/inheritance?hl=es#which-properties-are-inheritable
+   La herencia es como un sistema familiar en CSS:
+   - Los elementos "padres" pasan sus propiedades a sus elementos "hijos"
+   - Algunas propiedades se heredan automáticamente
+   - Otras necesitan ser heredadas manualmente
+   
+   Palabras clave importantes:
+   - inherit: "Usa el mismo valor que mi padre"
+   - initial: "Vuelve al valor predeterminado"
+   
+   
+   ========== PROPIEDADES QUE SE HEREDAN AUTOMÁTICAMENTE ==========
+   
+   Principalmente las relacionadas con texto:
+   - color
+   - font-family
+   - font-size
+   - font-style
+   - font-weight
+   - text-align
+   - line-height
+   
+   
+   ========== PROPIEDADES QUE NO SE HEREDAN AUTOMÁTICAMENTE ==========
+   
+   Principalmente las relacionadas con layout y espaciado:
+   - margin
+   - padding
+   - border
+   - background
+   - position
+   - display */
+
+
+/* ==========================================
+   EJEMPLO PRÁCTICO DE HERENCIA
+   ========================================== 
+
+   Estructura HTML de ejemplo:
+   <div class="cita-marco">
+       Texto del div
+       <cite>Texto dentro del cite</cite>
+   </div> */
+
+/* Estilos del elemento padre */
+.cita-marco {
+    /* Propiedades con !important sobrescriben todo */
+    background-color: moccasin !important;
+    background-color: darkorange !important;
+    /* Este gana por ser el último */
+
+    /* Propiedades que normalmente se heredan */
+    font-size: 32px;
+    /* Se hereda automáticamente */
+
+    /* Propiedades que normalmente no se heredan */
+    border-style: dotted;
+    /* No se hereda automáticamente */
+    border-color: red;
+    /* No se hereda automáticamente */
+}
+
+/* Estilos del elemento hijo */
+.cita-marco cite {
+    /* Ejemplo 1: Herencia de background-color */
+    background-color: pink;
+    /* Primero define su propio color */
+    background-color: inherit;
+    /* Luego hereda el color del padre (darkorange) */
+
+    /* Ejemplo 2: Manejo de font-size */
+    font-size: 24px;
+    /* Define su propio tamaño */
+    font-size: initial;
+    /* Vuelve al tamaño predeterminado del navegador */
+
+    /* Ejemplo 3: Herencia explícita de bordes */
+    border-style: inherit;
+    /* Hereda el estilo dotted del padre */
+    border-color: inherit;
+    /* Hereda el color red del padre */
+}
+
+/* ==========================================
+   EXPLICACIÓN DEL EJEMPLO ANTERIOR
+   ========================================== 
+
+   1. En el elemento padre (.cita-marco):
+      - Establece un color de fondo naranja (!important)
+      - Define un tamaño de letra de 32px
+      - Establece un borde punteado rojo
+   
+   2. En el elemento hijo (cite):
+      - Intenta tener un fondo rosa, pero luego hereda el naranja del padre
+      - Intenta tener letra de 24px, pero vuelve al tamaño inicial
+      - Hereda explícitamente el estilo y color del borde
+   
+   Resultado final del elemento cite:
+      - Fondo: darkorange (heredado por inherit)
+      - Tamaño de letra: tamaño base del navegador (por initial)
+      - Borde: punteado rojo (heredado explícitamente)
+
+
+   ==========================================
+   CONSEJOS PRÁCTICOS SOBRE HERENCIA
+   ========================================== 
+   
+   1. Usa 'inherit' cuando quieras:
+      - Mantener consistencia visual
+      - Asegurar que un elemento hijo se parezca a su padre
+   
+   2. Usa 'initial' cuando quieras:
+      - "Reiniciar" una propiedad
+      - Ignorar los valores heredados
+      - Volver al valor por defecto del navegador
+   
+   3. Ten en cuenta que:
+      - No todas las propiedades se heredan por defecto
+      - La herencia puede ser sobrescrita
+      - !important afecta también a la herencia */

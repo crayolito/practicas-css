@@ -1,0 +1,1082 @@
+/* ==========================================================================
+   MODELO DE CAJA (BOX MODEL)
+   https://cssreference.io/property/border/
+
+   ==========================================================================
+   El Box Model es la base de todo el layout en CSS. Cada elemento HTML
+   se trata como una caja rectangular con estas capas específicas:
+   
+   ┌──────── Caja ──────────┐
+   │     ┌─── Margen ───┐   │
+   │     │   ┌─────┐    │   │      Esta visualización muestra:
+   │     │   │     │    │   │      - La estructura en capas del elemento
+   │     │   │     │    │   │      - Cómo cada capa envuelve a la anterior
+   │     │   └─────┘    │   │      - El orden: contenido → padding → border → margin
+   │     └─────────────-┘   │
+   └────────────────────────┘ 
+   
+   Esta estructura es fundamental para:
+   - Controlar el espaciado entre elementos
+   - Definir los límites visuales
+   - Calcular las dimensiones totales */
+
+/* ==========================================================================
+   1. CONTENT (CONTENIDO) - El núcleo del elemento
+   ========================================================================== */
+h1 {
+  /* El contenido es donde se coloca el texto, imágenes u otros elementos
+       Es el punto de partida para todos los cálculos de dimensiones */
+  width: 400px;
+  /* Ancho base del contenido */
+  height: 200px;
+  /* Alto base del contenido */
+
+  /* Estas dimensiones son la base para el cálculo del tamaño total.
+       Si usamos box-sizing: content-box (valor por defecto),
+       padding y border se añadirán a estas dimensiones */
+}
+
+/* ==========================================================================
+   2. BORDER (BORDE) - El límite visible del elemento
+   ========================================================================== */
+h1 {
+  /* El borde es la línea visible que delimita el elemento
+       Podemos controlar cada aspecto individualmente: */
+  border-color: green;
+  /* Color base para todos los bordes */
+  border-top-color: red;
+  /* Solo cambia el color del borde superior */
+
+  /* Grosores predefinidos del borde:
+       thick  = 5px (grueso)
+       medium = 3px (medio)
+       thin   = 1px (fino) */
+  border-width: thick;
+
+  border-style: solid;
+  /* Estilo de línea: solid, dashed, dotted, etc. */
+
+  /* La forma más común y práctica es usar el shorthand border
+       que combina: grosor estilo color en ese orden */
+  border: 2px dashed blue;
+  /* Una línea punteada azul de 2px */
+}
+
+/* ==========================================================================
+   EJEMPLO PRÁCTICO CON CAJAS
+   ========================================================================== */
+.caja-uno,
+.caja-dos {
+  /* Estilos base que definen la apariencia visual */
+  background-color: chocolate;
+  /* Color de fondo marrón chocolate */
+  border: medium solid orange;
+  /* Borde naranja de 3px (medium) */
+
+  /* GUÍA COMPLETA DE SHORTHAND PARA PADDING Y MARGIN
+       Estas propiedades siguen reglas específicas según
+       el número de valores que proporcionemos: */
+
+  /* 1. Un valor: se aplica a todos los lados por igual */
+  padding: 20px;
+  /* 20px de relleno en todos los lados */
+  margin: 20px;
+  /* 20px de margen en todos los lados */
+
+  /* 2. Dos valores: el primer valor es para arriba/abajo (eje vertical)
+          el segundo es para izquierda/derecha (eje horizontal) */
+  padding: 20px 40px;
+  /* vertical: 20px, horizontal: 40px */
+  margin: 40px 20px;
+  /* vertical: 40px, horizontal: 20px */
+
+  /* 3. Tres valores: siguen el orden top | horizontal | bottom */
+  padding: 0 40px 20px;
+  /* arriba: 0, horizontal: 40px, abajo: 20px */
+  margin: 50px 30px 0;
+  /* arriba: 50px, horizontal: 30px, abajo: 0 */
+
+  /* 4. Cuatro valores: siguen el orden de las agujas del reloj
+          empezando desde arriba: top → right → bottom → left */
+  padding: 20px 40px 30px 10px;
+  /* Cada lado tiene su valor específico */
+  margin: 50px 30px 0 10px;
+  /* Valores individuales para cada lado */
+}
+
+/* ==========================================================================
+   CONSEJOS IMPORTANTES DEL BOX MODEL
+   ========================================================================== 
+   
+   1. CÁLCULO DEL ANCHO TOTAL:
+      ancho_total = width + padding-left + padding-right + 
+                    border-left + border-right + margin-left + margin-right
+      
+      Ejemplo: Si tienes width: 300px, padding: 20px, border: 2px, margin: 10px
+      El ancho total será: 300 + (20×2) + (2×2) + (10×2) = 364px
+
+   2. CÁLCULO DEL ALTO TOTAL:
+      alto_total = height + padding-top + padding-bottom + 
+                   border-top + border-bottom + margin-top + margin-bottom
+      
+      Funciona igual que el ancho pero en dirección vertical
+
+   3. box-sizing: border-box 
+      - Hace que width y height incluyan padding y border
+      - Facilita el cálculo de dimensiones
+      - Muy útil para layouts responsivos
+      - No incluye margin (el margin siempre se suma externamente)
+
+   4. MÁRGENES ESPECIALES:
+      - Valores negativos: crean superposición de elementos
+      - Colapso vertical: entre elementos adyacentes, se usa el mayor
+      - margin: auto: centra horizontalmente si hay width definido
+      - El colapso solo ocurre en márgenes verticales, no horizontales */
+
+/* ==========================================================================
+   TIPOS DE CAJAS EN CSS: INLINE VS BLOCK
+   ==========================================================================
+
+   En CSS existen dos tipos principales de cajas que determinan cómo se comportan
+   los elementos en el flujo del documento:
+
+   ┌─ Inline (En línea) ─┐ ┌─ Inline ─┐ ┌─ Inline ─┐
+   └───────────────────┘ └─────────┘ └─────────┘
+
+   ┌─────────── Block (Bloque) ───────────┐
+   └─────────────────────────────────────┘
+   ┌─────────── Block (Bloque) ───────────┐
+   └─────────────────────────────────────┘
+*/
+
+/* ==========================================================================
+   1. CAJAS EN LÍNEA (INLINE)
+   ========================================================================== */
+/* 
+Características principales de las cajas en línea:
+- Ocupan SOLO el espacio necesario para su contenido
+- No aceptan dimensiones width/height
+- Permiten elementos adyacentes en la misma línea
+- Padding y margin:
+  → Solo afectan horizontalmente
+  → NO generan separación vertical entre elementos
+  → NO empujan otros elementos verticalmente
+
+Ejemplos de elementos inline:
+<span>, <a>, <strong>, <em>, <img> (caso especial) */
+
+/* ==========================================================================
+   2. CAJAS DE BLOQUE (BLOCK)
+   ========================================================================== */
+/* 
+Características principales de las cajas de bloque:
+- Ocupan TODO el ancho disponible del contenedor
+- Generan saltos de línea antes y después
+- Aceptan dimensiones width/height
+- No permiten elementos a sus lados
+- Padding y margin:
+  → Afectan en todas las direcciones
+  → Empujan elementos vertical y horizontalmente
+  → Respetan las dimensiones especificadas
+
+Ejemplos de elementos block:
+<div>, <p>, <h1>-<h6>, <section>, <article> */
+
+/* ==========================================================================
+   3. EJEMPLO PRÁCTICO
+   ========================================================================== */
+.caja-linea,
+.caja-bloque {
+  /* Estilos visuales compartidos */
+  background-color: darkcyan;
+  /* Fondo verde azulado */
+  color: white;
+  /* Texto blanco */
+
+  /* Dimensiones base - Nota: solo funcionarán en .caja-bloque */
+  width: 500px;
+  /* Ancho fijo - ignorado en inline */
+  height: 250px;
+  /* Alto fijo - ignorado en inline */
+
+  /* Bordes y espaciado */
+  border: medium solid black;
+  /* Borde negro de grosor medio */
+  padding: 16px;
+  /* Relleno interior de 16px */
+}
+
+/* Estilos específicos para caja de bloque */
+.caja-bloque {
+  margin: 32px;
+  /* Margen en todas direcciones */
+}
+
+/* Estilos específicos para caja en línea */
+.caja-linea {
+  margin: 48px;
+  /* Solo afectará horizontalmente */
+}
+
+/* ==========================================================================
+   4. CASOS ESPECIALES Y CONSIDERACIONES
+   ========================================================================== 
+
+   1. display: inline-block
+      - Combina características de ambos tipos
+      - Permite dimensiones como block
+      - Permite elementos adyacentes como inline
+      - Útil para menús horizontales y layouts en grid
+
+   2. Elementos reemplazados (como <img>)
+      - Son inline por defecto
+      - Aceptan dimensiones aunque sean inline
+      - Pueden tener comportamiento mixto
+
+   3. Transformación entre tipos
+      - display: block; → Convierte a caja de bloque
+      - display: inline; → Convierte a caja en línea
+      - display: inline-block; → Comportamiento híbrido
+
+   4. Efectos en el layout
+      - Block: Útil para estructuras verticales
+      - Inline: Ideal para contenido en flujo de texto
+      - La elección afecta a:
+        → Flujo del documento
+        → Capacidad de dimensionamiento
+        → Comportamiento del margin y padding */
+
+/* ==========================================================================
+   PROPIEDAD DISPLAY EN CSS
+   ==========================================================================
+   La propiedad display es fundamental en CSS ya que determina:
+   - Cómo se renderiza el elemento
+   - Cómo interactúa con otros elementos
+   - Qué modelo de formato se usa */
+
+/* ==========================================================================
+   1. VALORES BÁSICOS DE DISPLAY
+   ========================================================================== */
+/* 
+display: inline
+--------------
+- Comportamiento en línea (como texto)
+- No acepta width ni height
+- margin y padding solo afectan horizontalmente
+- Ejemplos: <span>, <a>, <strong>
+- Caso de uso: texto con estilos especiales dentro de párrafos
+
+display: block
+-------------
+- Ocupa todo el ancho disponible
+- Genera saltos de línea
+- Acepta todas las propiedades de dimensión
+- Ejemplos: <div>, <p>, <section>
+- Caso de uso: secciones principales, contenedores
+
+display: inline-block
+--------------------
+- Híbrido entre inline y block
+- Se comporta como elemento en línea externamente
+- Acepta dimensiones como bloque internamente
+- Útil para: menús horizontales, grids de elementos
+- Mantiene propiedades de dimensionamiento
+
+display: none
+------------
+- Oculta completamente el elemento
+- No ocupa espacio en el layout
+- El elemento no es accesible
+- Útil para: toggles, contenido dinámico
+- Diferente de visibility: hidden
+
+display: table
+-------------
+- Simula comportamiento de tabla HTML
+- Útil para layouts específicos
+- Relacionado: table-row, table-cell
+- Caso de uso: datos tabulares sin tabla HTML
+
+display: list-item
+-----------------
+- Comportamiento de elemento de lista
+- Genera un marcador (bullet o número)
+- Similar a <li> en HTML
+- Útil para listas personalizadas
+
+display: flex
+------------
+- Activa el modelo flexbox
+- Ideal para layouts unidimensionales
+- Control sobre alineación y distribución
+- Ver curso específico de CSS FLEXBOX
+
+display: grid
+------------
+- Activa el sistema de grid
+- Perfect para layouts bidimensionales
+- Control preciso sobre filas y columnas
+- Ver curso específico de CSS GRID */
+
+/* ==========================================================================
+   2. EJEMPLO PRÁCTICO
+   ========================================================================== */
+.caja-none,
+.caja-linea-bloque,
+.caja-hidden {
+  /* Estilos base compartidos */
+  background-color: darkolivegreen;
+  /* Fondo verde oliva oscuro */
+  color: wheat;
+  /* Texto color trigo */
+  width: 600px;
+  /* Ancho fijo */
+  height: 300px;
+  /* Alto fijo */
+  border: medium solid black;
+  /* Borde negro medio */
+}
+
+/* Display inline-block: híbrido entre inline y block */
+.caja-linea-bloque {
+  display: inline-block;
+  /* Permite dimensiones manteniendo flujo en línea */
+}
+
+/* Display none: remueve completamente del flujo */
+.caja-none {
+  display: none;
+  /* Elemento no visible y sin espacio */
+}
+
+/* Visibility hidden: oculta pero mantiene espacio */
+.caja-hidden {
+  visibility: hidden;
+  /* Elemento invisible pero mantiene su espacio */
+}
+
+/* ==========================================================================
+   3. DIFERENCIAS CLAVE ENTRE VISIBILITY Y DISPLAY
+   ========================================================================== */
+/* 
+display: none vs visibility: hidden
+
+1. display: none
+   - Remueve completamente el elemento del DOM visual
+   - No ocupa espacio en el layout
+   - No es accesible para lectores de pantalla
+   - Afecta el flujo del documento
+   - Útil cuando quieres que el elemento no afecte el layout
+
+2. visibility: hidden
+   - El elemento sigue ocupando su espacio
+   - Mantiene su impacto en el layout
+   - Puede ser accesible para lectores de pantalla
+   - No afecta la posición de otros elementos
+   - Útil cuando quieres mantener el espacio reservado */
+
+/* ==========================================================================
+   4. CASOS DE USO Y MEJORES PRÁCTICAS
+   ========================================================================== */
+/* 
+1. inline-block
+   - Menús de navegación horizontal
+   - Grids de imágenes o tarjetas
+   - Iconos junto a texto
+   - Botones en línea con dimensiones específicas
+
+2. display: none
+   - Ventanas modales ocultas
+   - Menús desplegables
+   - Contenido que se muestra/oculta con JavaScript
+   - Versiones diferentes para móvil/escritorio
+
+3. visibility: hidden
+   - Placeholders de contenido
+   - Animaciones con fade
+   - Mantener layout mientras se carga contenido
+   - Elementos que necesitan mantener su espacio
+
+4. Consideraciones de accesibilidad
+   - display: none oculta de lectores de pantalla
+   - visibility: hidden puede ser más accesible
+   - Usar aria-hidden para control específico
+   - Considerar el impacto en navegación por teclado */
+
+/* ==========================================================================
+   OVERFLOW EN CSS
+   ==========================================================================
+   La propiedad overflow controla cómo se maneja el contenido cuando excede
+   las dimensiones de su contenedor. Es crucial para:
+   - Controlar contenido dinámico
+   - Manejar texto largo
+   - Crear áreas scrolleables
+   
+   Visualización de overflow:
+   ┌── Contenedor ──┐
+   │ Contenido que │
+   │ excede los    ├─► Contenido que sobresale
+   │ límites...    │
+   └───────────────┘
+*/
+
+/* ==========================================================================
+   EJEMPLO PRÁCTICO DE OVERFLOW
+   ========================================================================== */
+.overflow {
+  /* Estilos base del contenedor */
+  background-color: darkcyan;
+  /* Color de fondo verde azulado */
+  width: 200px;
+  /* Ancho fijo del contenedor */
+  height: 100px;
+  /* Alto fijo del contenedor */
+
+  /* Diferentes valores de overflow: */
+
+  /* 1. visible (valor por defecto) */
+  overflow: visible;
+  /* El contenido excedente es visible
+                                     fuera del contenedor */
+
+  /* 2. hidden */
+  overflow: hidden;
+  /* Oculta todo el contenido que
+                                     sobrepase los límites */
+
+  /* 3. scroll */
+  overflow: scroll;
+  /* Siempre muestra barras de scroll,
+                                     aunque no sean necesarias */
+
+  /* 4. auto */
+  overflow: auto;
+  /* Muestra barras de scroll solo
+                                     cuando son necesarias */
+
+  /* Control independiente por eje */
+  /* overflow-y: scroll;            Scroll solo vertical */
+  /* overflow-x: scroll;            Scroll solo horizontal */
+}
+
+/* ==========================================================================
+   DETALLES DE CADA VALOR DE OVERFLOW
+   ========================================================================== */
+/* 
+1. overflow: visible
+   ----------------
+   - Comportamiento predeterminado
+   - El contenido se muestra aunque exceda los límites
+   - Puede causar superposición con otros elementos
+   - Útil cuando necesitas que el contenido sea siempre visible
+   - Casos de uso: tooltips, menús desplegables
+
+2. overflow: hidden
+   ---------------
+   - Recorta todo el contenido excedente
+   - No muestra barras de desplazamiento
+   - Crea un nuevo contexto de formato
+   - Útil para mantener dimensiones fijas
+   - Casos de uso: tarjetas con altura fija, imágenes de tamaño fijo
+
+3. overflow: scroll
+   ---------------
+   - Siempre muestra barras de desplazamiento
+   - Disponible en ambos ejes (x e y)
+   - Puede afectar el layout por el espacio de las barras
+   - Útil cuando sabes que necesitarás scroll
+   - Casos de uso: paneles de código, áreas de texto largo
+
+4. overflow: auto
+   -------------
+   - Comportamiento inteligente
+   - Muestra barras solo cuando son necesarias
+   - Mejor opción para la mayoría de casos
+   - Previene problemas de layout innecesarios
+   - Casos de uso: contenido dinámico, listas largas */
+
+/* ==========================================================================
+   CONTROL POR EJES (X/Y)
+   ========================================================================== */
+/* 
+overflow-x y overflow-y permiten control independiente:
+
+.ejemplo-overflow-ejes {
+    overflow-y: scroll;    /* Solo scroll vertical 
+    overflow-x: hidden;    /* Oculta desbordamiento horizontal 
+}
+
+Casos comunes:
+1. Tablas responsivas:
+   overflow-x: auto;
+   overflow-y: hidden;
+
+2. Listas largas:
+   overflow-x: hidden;
+   overflow-y: auto;
+
+3. Contenido de altura fija:
+   overflow-y: auto;
+   overflow-x: visible; */
+
+/* ==========================================================================
+   CONSEJOS Y MEJORES PRÁCTICAS
+   ========================================================================== */
+/* 
+1. Rendimiento
+   -----------
+   - overflow: auto es más eficiente que scroll
+   - hidden puede mejorar el rendimiento al reducir el área de render
+   - Evitar cambios frecuentes en overflow
+
+2. Accesibilidad
+   -------------
+   - Asegurar que el contenido scrolleable sea obvio
+   - Proporcionar indicadores visuales de scroll
+   - Considerar usuarios de teclado
+
+3. Diseño Responsivo
+   ----------------
+   - Usar overflow: auto para contenido variable
+   - Considerar diferentes tamaños de pantalla
+   - Combinar con media queries cuando sea necesario
+
+4. Problemas Comunes
+   ----------------
+   - Barras de scroll innecesarias
+   - Contenido cortado inesperadamente
+   - Problemas de rendimiento
+   - Comportamiento inconsistente entre navegadores
+
+5. Soluciones
+   ----------
+   - Probar en diferentes navegadores
+   - Usar normalize.css o reset
+   - Considerar el padding para contenido scrolleable
+   - Testear con diferentes cantidades de contenido */
+
+/* ==========================================================================
+   ¿QUÉ ES BOX-SIZING Y POR QUÉ ES IMPORTANTE?
+   ==========================================================================
+   
+   Imagina que estás armando una caja de regalo 📦:
+
+   1. content-box es como medir solo el regalo
+      - Luego agregas el material de relleno
+      - Y finalmente la caja decorativa
+      - El tamaño final será más grande que tu medida inicial
+
+   2. border-box es como medir la caja completa
+      - Ya incluye el espacio para relleno y decoración
+      - El regalo se ajusta para caber dentro
+      - El tamaño final es exactamente tu medida inicial */
+
+/* ==========================================================================
+   EJEMPLO 1: LA DIFERENCIA ENTRE CONTENT-BOX Y BORDER-BOX
+   ========================================================================== */
+.box-sizing-border {
+  /* Versión tradicional (content-box) */
+  background-color: deepskyblue; /* Color de fondo para visualizar */
+  box-sizing: content-box; /* Modo tradicional */
+  width: 500px; /* Solo el contenido mide 500px */
+  height: 250px; /* Solo el contenido mide 250px */
+  padding: 10px; /* Relleno que SE SUMA al tamaño */
+  border: thick solid black; /* Borde que SE SUMA al tamaño */
+
+  /* 👉 ¡IMPORTANTE! Con content-box:
+       - Es como pedir una pizza de 30cm y que te llegue en una caja de 35cm
+       - El tamaño final será MAYOR que el especificado
+       
+       Tamaño real:
+       Ancho: 500px (contenido) + 20px (padding) + 10px (bordes) = 530px
+       Alto: 250px (contenido) + 20px (padding) + 10px (bordes) = 280px */
+}
+
+/* Versión moderna (border-box) */
+.box-sizing-border {
+  box-sizing: border-box; /* Modo moderno */
+
+  /* 👉 Ahora con border-box:
+       - Es como pedir una caja de 500px y que TODO quepa dentro
+       - El contenido se ajusta automáticamente más pequeño
+       - El tamaño final es EXACTAMENTE 500px x 250px */
+}
+
+/* ==========================================================================
+   EJEMPLO 2: UN CASO PRÁCTICO - CREANDO COLUMNAS
+   ========================================================================== */
+/* El contenedor principal */
+.container-col-3 {
+  background: burlywood; /* Color para ver el contenedor */
+  width: 600px; /* Ancho total disponible */
+  height: 300px; /* Alto total disponible */
+  margin-top: 20px; /* Espacio arriba */
+}
+
+/* Las columnas dentro del contenedor */
+.container-col-3 > * {
+  /* Esto aplica a todos los elementos dentro del contenedor */
+  box-sizing: border-box; /* Usar el modo moderno */
+  width: 200px; /* Cada columna ocupará 200px TOTAL */
+  border: thin solid red; /* Borde para ver los límites */
+  padding: 10px; /* Espacio interno */
+
+  /* 👉 ¿Por qué es esto inteligente?
+       - El contenedor tiene 600px
+       - Queremos 3 columnas iguales
+       - 600px ÷ 3 = 200px por columna
+       - Con border-box, ¡todo encaja perfectamente! */
+}
+
+/* ==========================================================================
+   EJEMPLO 3: LA SOLUCIÓN UNIVERSAL (Gracias a Paul Irish)
+   ========================================================================== */
+/* Paso 1: Establecer la regla base en el HTML */
+html {
+  box-sizing: border-box; /* Todos usarán border-box por defecto */
+}
+
+/* Paso 2: Hacer que TODO herede esta regla */
+*,
+*:before,
+*:after {
+  box-sizing: inherit; /* Heredar el comportamiento de border-box */
+}
+
+/* 👉 ¿Por qué es esto genial?
+   - Es como decir "todas las cajas en este proyecto funcionan igual"
+   - Evita sorpresas y cálculos complicados
+   - Es el estándar moderno que usan los profesionales */
+
+/* ==========================================================================
+   RESUMEN FINAL: ¿CUÁNDO USAR CADA UNO?
+   ========================================================================== 
+
+   1. content-box (el viejo):
+      ❌ Requiere matemáticas adicionales
+      ❌ Puede causar dolores de cabeza en layouts
+      ✅ Es el valor por defecto en CSS
+      ✅ Necesario para compatibilidad con código antiguo
+
+   2. border-box (el nuevo):
+      ✅ Las medidas son más intuitivas
+      ✅ Facilita crear layouts complejos
+      ✅ Es lo que la mayoría usa hoy en día
+      ✅ Recomendado para nuevos proyectos
+
+   📝 Consejo profesional:
+   - Usa el reset de Paul Irish al inicio de tu proyecto
+   - Trabaja con border-box por defecto
+   - Tus layouts serán más fáciles de manejar
+   - Evitarás muchos problemas de cálculos */
+
+/* ==========================================================================
+   FLOATS Y CLEAR EN CSS: FUNDAMENTOS
+   ==========================================================================
+   
+   🌊 Imagina que los elementos HTML son como objetos flotando en agua:
+   - float: left es como empujar algo hacia la izquierda
+   - float: right es como empujar algo hacia la derecha
+   - clear es como poner una barrera para que nada flote cerca */
+
+/* ==========================================================================
+   1. EL CONTENEDOR PRINCIPAL
+   ========================================================================== */
+.container-floats {
+  background-color: cornflowerblue; /* Color de fondo azul */
+
+  /* 👉 ¿Por qué necesitamos un contenedor?
+       - Es como una piscina donde los elementos flotan
+       - Ayuda a mantener los elementos flotantes organizados
+       - Sin él, los elementos podrían "derramarse" por la página */
+}
+
+/* ==========================================================================
+   2. FLOAT LEFT (FLOTAR A LA IZQUIERDA)
+   ========================================================================== */
+.float-left {
+  float: left; /* El elemento flota a la izquierda */
+
+  /* 👉 ¿Qué hace float: left?
+       - Imagina empujar un objeto al lado izquierdo de la piscina
+       - Otros elementos intentarán flotar a su derecha
+       - El elemento sale del flujo normal del documento
+       
+       Casos de uso comunes:
+       - Imágenes con texto alrededor
+       - Crear columnas de contenido
+       - Menús de navegación horizontales */
+}
+
+/* ==========================================================================
+   3. FLOAT RIGHT (FLOTAR A LA DERECHA)
+   ========================================================================== */
+.float-right {
+  float: right; /* El elemento flota a la derecha */
+
+  /* 👉 ¿Qué hace float: right?
+       - Como empujar un objeto al lado derecho de la piscina
+       - Otros elementos intentarán flotar a su izquierda
+       - También sale del flujo normal
+       
+       Casos de uso comunes:
+       - Barras laterales
+       - Botones de "siguiente" o "anterior"
+       - Elementos de interfaz secundarios */
+}
+
+/* ==========================================================================
+   4. CLEARFIX (LIMPIAR FLOTANTES)
+   ========================================================================== */
+.clearfix {
+  clear: both; /* Limpia flotantes en ambos lados */
+
+  /* 👉 ¿Por qué necesitamos clear?
+       - Es como poner una barrera en la piscina
+       - Evita que los elementos floten cerca
+       - Ayuda a mantener el diseño ordenado
+       
+       Tipos de clear:
+       - clear: left  (limpia flotantes izquierdos)
+       - clear: right (limpia flotantes derechos)
+       - clear: both  (limpia ambos lados) */
+}
+
+/* ==========================================================================
+   EJEMPLO PRÁCTICO
+   ========================================================================== */
+/* 
+<div class="container-floats">
+    <img class="float-left" src="imagen1.jpg">
+    <p>Este texto fluirá alrededor de la imagen...</p>
+    <div class="clearfix"></div>
+    <img class="float-right" src="imagen2.jpg">
+    <p>Este texto fluirá alrededor de la segunda imagen...</p>
+</div>
+
+👉 En este ejemplo:
+1. La primera imagen flota a la izquierda
+2. El texto fluye alrededor de ella
+3. clearfix evita que los elementos siguientes floten
+4. La segunda imagen flota a la derecha
+5. El nuevo texto fluye alrededor de esta imagen */
+
+/* ==========================================================================
+   PROBLEMAS COMUNES Y SOLUCIONES
+   ========================================================================== 
+
+   1. Contenedor colapsado
+      Problema: El contenedor no reconoce la altura de elementos flotantes
+      Solución: Usar clearfix o establecer overflow: auto en el contenedor
+
+   2. Elementos flotantes escapando
+      Problema: Los elementos flotan fuera de su contenedor
+      Solución: Asegurarse de usar clearfix después de elementos flotantes
+
+   3. Diseño responsive
+      Problema: Los flotantes pueden romper el diseño en móviles
+      Solución: Usar media queries para eliminar floats en pantallas pequeñas
+
+
+   🚨 CONSEJOS IMPORTANTES:
+
+   1. Uso moderno:
+      - Floats fueron diseñados originalmente para texto alrededor de imágenes
+      - Para layouts modernos, considera usar Flexbox o Grid en su lugar
+      - Floats siguen siendo útiles para casos específicos
+
+   2. Mejor rendimiento:
+      - Limita el uso de floats a lo necesario
+      - Usa clearfix estratégicamente
+      - Considera alternativas modernas cuando sea posible
+
+   3. Accesibilidad:
+      - Asegúrate de que el orden del contenido tenga sentido
+      - Los lectores de pantalla pueden tener problemas con floats
+      - Mantén una estructura HTML lógica */
+
+/* ==========================================================================
+   COLAPSO DE MÁRGENES VERTICALES
+   ==========================================================================
+   
+   🤔 ¿Qué es el colapso de márgenes?
+   Es cuando dos márgenes verticales (arriba y abajo) se "fusionan" en uno solo.
+   
+   Sin colapso:           Con colapso:
+   ┌──────────┐          ┌──────────┐
+   └──────────┘          └──────────┘
+      16px               
+   ┌──────────┐             16px    
+   └──────────┘          ┌──────────┐
+                         └──────────┘
+
+   👉 En el ejemplo de la izquierda, esperarías 32px de espacio (16px + 16px)
+   👉 Pero debido al colapso, obtienes solo 16px (el margen más grande gana) */
+
+/* ==========================================================================
+   EJEMPLO PRÁCTICO
+   ========================================================================== */
+.margin-collapse {
+  background-color: skyblue; /* Color de fondo para visualizar */
+
+  /* 👉 El contenedor tiene fondo para que podamos ver su comportamiento
+       - Sin el fondo, sería difícil ver dónde empieza y termina
+       - El contenedor también puede participar en el colapso */
+}
+
+.margin-collapse section {
+  border: thin solid black; /* Borde fino para ver los límites */
+  margin-top: 16px; /* Margen superior de 16px */
+
+  /* 🎯 ¿Qué está pasando aquí?
+       1. Cada section tiene un margen superior de 16px
+       2. Cuando dos sections se encuentran, sus márgenes colapsan
+       3. En lugar de tener 32px entre ellos (16px + 16px)
+       4. Tendremos solo 16px (el mayor de los dos márgenes) */
+}
+
+/* ==========================================================================
+   REGLAS DEL COLAPSO DE MÁRGENES
+   ========================================================================== 
+
+   1. 📏 Solo ocurre con márgenes verticales
+      ✅ margin-top y margin-bottom colapsan
+      ❌ margin-left y margin-right NUNCA colapsan
+
+   2. 🏆 El margen más grande gana
+      Si un elemento tiene margin-bottom: 20px
+      Y el siguiente tiene margin-top: 15px
+      El espacio total será 20px (no 35px)
+
+   3. ⚡ Los márgenes negativos también participan
+      - Con dos márgenes positivos: se usa el mayor
+      - Con dos márgenes negativos: se usa el más negativo
+      - Con margen positivo y negativo: se suman
+
+   4. 🚫 El colapso NO ocurre cuando:
+      - Hay padding o border entre los márgenes
+      - Los elementos son flotantes (float)
+      - Los elementos tienen position: absolute
+      - Los elementos están en flexbox o grid */
+
+/* ==========================================================================
+   EJEMPLO VISUAL DEL COLAPSO
+   ========================================================================== 
+
+   HTML:
+   <div class="margin-collapse">
+     <section>Primer section</section>
+     <section>Segundo section</section>
+     <section>Tercer section</section>
+   </div>
+
+   Representación visual:
+   
+   ┌────────────────────────────┐
+   │        Contenedor          │
+   │   ┌──────────────────┐    │
+   │   │  Primer section  │    │
+   │   └──────────────────┘    │
+   │          16px             │ ← Solo 16px, no 32px
+   │   ┌──────────────────┐    │
+   │   │ Segundo section  │    │
+   │   └──────────────────┘    │
+   │          16px             │ ← Solo 16px, no 32px
+   │   ┌──────────────────┐    │
+   │   │  Tercer section  │    │
+   │   └──────────────────┘    │
+   └────────────────────────────┘ */
+
+/* ==========================================================================
+   CONSEJOS PRÁCTICOS
+   ========================================================================== 
+
+   1. 🎨 Para diseño predecible:
+      - Usa margin-top o margin-bottom consistentemente
+      - Evita usar ambos en elementos adyacentes
+      - Ejemplo: usa solo margin-bottom en todo el sitio
+
+   2. 🛠 Para evitar el colapso:
+      - Agrega padding o border
+      - Usa display: flex en el contenedor
+      - Usa display: grid en el contenedor
+      
+   3. 📱 Para diseño responsive:
+      - Ten en cuenta el colapso al calcular espacios
+      - Usa herramientas de desarrollo para inspeccionar
+      - Prueba diferentes tamaños de pantalla
+
+   4. 🐛 Depuración:
+      - Usa bordes temporales para ver los márgenes
+      - Inspecciona con las herramientas de desarrollo
+      - Verifica si hay elementos inesperados */
+
+/* ==========================================================================
+   PARTE 1: COLAPSO DE MÁRGENES VERTICALES
+   ==========================================================================
+   
+   🔍 ¿Qué son los márgenes?
+   - Son espacios invisibles alrededor de los elementos
+   - Como el aire alrededor de las cajas
+   
+   Tenemos dos tipos de elementos:
+   1. Elementos en bloque (como section): ocupan toda la línea
+   2. Elementos en línea (como span): solo ocupan su contenido */
+
+/* ==========================================================================
+   1. MÁRGENES EN ELEMENTOS DE BLOQUE
+   ========================================================================== */
+.margin-collapse {
+  background-color: skyblue; /* Fondo azul claro para visualizar */
+}
+
+.margin-collapse section {
+  border: thin solid black; /* Borde para ver los límites */
+  margin-top: 16px; /* Espacio arriba */
+  margin-bottom: 16px; /* Espacio abajo */
+
+  /* 👉 ¿Qué sucede aquí?
+       Si tenemos dos sections seguidos:
+       
+       ┌─── Section 1 ───┐
+       └────────────────-┘
+            16px ↕ (¡No 32px!)
+       ┌─── Section 2 ───┐
+       └────────────────-┘
+       
+       - El espacio entre ellos será 16px, no 32px
+       - Esto se llama "colapso de márgenes"
+       - Solo ocurre con márgenes verticales (arriba/abajo)
+       - Se usa el margen más grande entre los dos */
+}
+
+/* ==========================================================================
+   2. MÁRGENES EN ELEMENTOS EN LÍNEA
+   ========================================================================== */
+.margin-collapse span {
+  border: thin solid black; /* Borde para ver los límites */
+  display: inline-block; /* Permite márgenes horizontales */
+  margin-right: 16px; /* Espacio a la derecha */
+  margin-left: 16px; /* Espacio a la izquierda */
+
+  /* 👉 ¿Qué es diferente aquí?
+       
+       [Span 1] 16px [Span 2] 16px [Span 3]
+       
+       - Los márgenes horizontales NO colapsan
+       - Se suman normalmente
+       - Entre dos spans hay 32px (16px + 16px)
+       - Más predecible que los márgenes verticales */
+}
+
+/* ==========================================================================
+   PARTE 2: CENTRADO DE CAJAS
+   ==========================================================================
+   
+   🎯 Objetivo: Centrar una caja en la página
+   
+   Es como colgar un cuadro en la pared:
+   1. Decides el tamaño del cuadro
+   2. Mides el espacio disponible
+   3. Dejas el mismo espacio a cada lado */
+
+/* ==========================================================================
+   3. TÉCNICA DE CENTRADO AUTOMÁTICO
+   ========================================================================== */
+.sitio-web {
+  /* Estilo visual */
+  border: thin solid black; /* Borde para ver los límites */
+  background-color: thistle; /* Color morado claro */
+
+  /* Dimensiones de la caja */
+  width: 800px; /* Ancho fijo necesario */
+  height: 1000px; /* Alto de la caja */
+  padding: 16px; /* Espacio interno */
+
+  /* ⭐ El truco del centrado ⭐ */
+  margin-left: auto; /* Margen automático izquierdo */
+  margin-right: auto; /* Margen automático derecho */
+
+  /* Espacio superior manual */
+  margin-top: 200px; /* Espacio desde arriba */
+
+  /* Centrado del contenido interno */
+  text-align: center; /* Centra el texto dentro */
+
+  /* 👉 ¿Cómo funciona?
+       
+       ┌─────── Ventana del navegador ───────┐
+       │                                     │
+       │         200px de espacio            │
+       │    ┌────────────────────┐          │
+       │    │                    │          │
+       │    │    Sitio web       │          │
+       │    │                    │          │
+       │    │ (800px de ancho)   │          │
+       │    │                    │          │
+       │    └────────────────────┘          │
+       │                                     │
+       └─────────────────────────────────────┘
+       
+       - margin: auto calcula automáticamente
+         espacios iguales a izquierda y derecha
+       - Solo funciona con width definido
+       - Es el método más confiable para centrar */
+}
+
+/* ==========================================================================
+   CONSEJOS PRÁCTICOS
+   ========================================================================== 
+
+   1. 📏 Para márgenes verticales:
+      - Usa solo margin-top o solo margin-bottom
+      - Evita usar ambos para prevenir confusiones
+      - Recuerda que colapsarán
+
+   2. 📐 Para márgenes horizontales:
+      - No hay colapso, se suman normal
+      - Útiles para espaciado entre elementos en línea
+      - Buenos para crear ritmo horizontal
+
+   3. 🎯 Para centrar elementos:
+      - Necesitas un ancho definido
+      - margin: 0 auto es un atajo común
+      - Funciona solo con elementos de bloque
+
+   4. 💡 Trucos adicionales:
+      - Para centrar verticalmente, considera Flexbox
+      - text-align: center es para contenido, no cajas
+      - Usa las herramientas del navegador para depurar */
+
+
+Posicionamiento CSS 
+
+Las propiedades FLOAT y POSITION nos permiten modificar la posicion natural de cualquier
+elemento del documento html
+
+El navegador coloca cada elemento teniendo en cuenta el orden en el que aparecen en el 
+doducmento y su tipo de visualizacion si es un elemento de linea o de blockquote
+
+Con Float y Position podemos modificar este comportamiento
+
+Elementos Flotantes
+- float : Convierte un elemento en flotante desplazandolo hasta la zona mas a ala 
+izquierda o mas a la derecha de la posicion en al que originalmente se encontraba.
+- clear : Limpia la flotacion (left, right, both)
+
+Tipos de Posicionamiento
+- static (default)
+- relative
+- absolute
+- fixed
+- sticky
+
+Para mover los elementos posiconados se activan las propiedades :
+- top (vertical - eje Y)
+- bottom (vertical - eje Y)
+- left (horizontal - eje X)
+- right (horizontal - eje X)
+- z-index (profundidad eje Z)
+
+Las propiedades de top y eft van a tener preferencia por sobre botton y right
+repectivamente 
