@@ -1,0 +1,492 @@
+/* ==========================================================================
+   POSICIONAMIENTO EN CSS: GUÍA COMPLETA
+   ==========================================================================
+
+   El posicionamiento determina cómo se ubican y comportan los elementos en la página.
+   Por defecto, los elementos siguen el "flujo normal":
+   - Elementos de bloque: uno debajo del otro
+   - Elementos de línea: uno al lado del otro
+
+   REQUISITOS BÁSICOS PARA USAR POSICIONAMIENTO:
+   1. Entender el flujo normal del documento
+   2. Conocer la diferencia entre elementos de línea y bloque
+   3. Comprender el box model */
+
+
+/* ==========================================================================
+   1. POSITION: STATIC (Valor por defecto)
+   ========================================================================== */
+   .static {
+    background-color: yellow;
+    position: static;
+    top: 10px;              /* No tiene efecto */
+    left: 10px;             /* No tiene efecto */
+
+    /* ¿QUÉ ES?
+       El posicionamiento normal que tienen todos los elementos
+       
+       ✅ ÚSALO CUANDO:
+       - Quieres el comportamiento normal del elemento
+       - Necesitas eliminar otro tipo de posicionamiento
+       
+       ❌ NO LO USES CUANDO:
+       - Necesites mover el elemento de su posición
+       - Quieras crear un contenedor para position: absolute
+       
+       ⚠️ LIMITACIONES:
+       - No acepta propiedades de posicionamiento (top, left, etc.)
+       - No acepta z-index
+       
+       🔍 ERRORES COMUNES:
+       - Intentar mover elementos con top/left en static
+       - Olvidar que es el valor por defecto */
+}
+
+
+/* ==========================================================================
+   2. POSITION: RELATIVE
+   ========================================================================== */
+.relative {
+    background-color: turquoise;
+    position: relative;
+    width: 300px;
+    height: 200px;
+    top: 20px;
+    left: 20px;
+
+    /* ¿QUÉ ES?
+       Posicionamiento relativo a su posición original
+       
+       ✅ ÚSALO CUANDO:
+       - Necesites mover un elemento ligeramente
+       - Quieras crear un contexto para elementos absolute
+       - Necesites usar z-index
+       
+       ❌ NO LO USES CUANDO:
+       - El movimiento afecte negativamente el layout
+       - No necesites mover el elemento
+       - Solo quieras crear contenedor (usa otros métodos)
+       
+       ⚠️ LIMITACIONES:
+       - Mantiene su espacio original (puede crear espacios no deseados)
+       - Puede causar problemas de rendimiento si se anima
+       
+       🔍 ERRORES COMUNES:
+       - Usar relative solo para crear contexto posicionado
+       - Olvidar que mantiene su espacio original
+       - Mover elementos demasiado lejos de su posición */
+}
+
+
+/* ==========================================================================
+   3. POSITION: ABSOLUTE
+   ========================================================================== */
+.absolute {
+    background-color: tomato;
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    right: 0;
+    bottom: 0;
+
+    /* ¿QUÉ ES?
+       Posicionamiento fuera del flujo normal, relativo a un ancestro posicionado
+       
+       ✅ ÚSALO CUANDO:
+       - Necesites superponer elementos
+       - Quieras posicionar elementos con precisión
+       - Trabajes con componentes modales o tooltips
+       
+       ❌ NO LO USES CUANDO:
+       - El elemento deba mantener su espacio en el layout
+       - No tengas un contenedor posicionado definido
+       - Trabajes con diseños responsivos simples
+       
+       ⚠️ LIMITACIONES:
+       - Pierde su espacio en el documento
+       - Puede causar problemas de accesibilidad
+       - Puede complicar el diseño responsive
+       
+       🔍 ERRORES COMUNES:
+       - Olvidar establecer un contenedor posicionado
+       - Usar absolute para layouts básicos
+       - No considerar el comportamiento en móviles */
+}
+
+/* Ejemplo de absolute con padre relativo */
+.relative-parent {
+    background-color: khaki;
+    position: relative;    /* Contexto para absolute */
+    width: 600px;
+    height: 50px;
+    top: 50px;
+    left: 50px;
+}
+
+.absolute-child {
+    background-color: lightcoral;
+    position: absolute;
+    top: -50px;
+    left: -30px;
+
+    /* ⚠️ REQUISITOS DEL CONTENEDOR:
+       - Debe tener position distinto de static
+       - Debe tener dimensiones definidas si es necesario
+       - Debe considerar el desbordamiento
+       
+       🔍 ERRORES COMUNES EN LA RELACIÓN PADRE-HIJO:
+       - Olvidar posicionar el padre
+       - No considerar el desbordamiento
+       - Valores negativos inesperados */
+}
+
+
+/* ==========================================================================
+   4. POSITION: FIXED
+   ========================================================================== */
+.fixed {
+    background-color: lightgreen;
+    position: fixed;
+    width: 300px;
+    height: 100px;
+    right: 20px;
+    bottom: 10px;
+
+    /* ¿QUÉ ES?
+       Posicionamiento fijo respecto a la ventana del navegador
+       
+       ✅ ÚSALO CUANDO:
+       - Necesites elementos siempre visibles
+       - Implementes barras de navegación fijas
+       - Crees botones de acción flotantes
+       
+       ❌ NO LO USES CUANDO:
+       - La página tenga poco contenido
+       - Pueda interferir con el contenido importante
+       - Trabajes con teclados virtuales móviles
+       
+       ⚠️ LIMITACIONES:
+       - Puede ser problemático en móviles
+       - Puede ocultar contenido importante
+       - Consume recursos de rendimiento
+       
+       🔍 ERRORES COMUNES:
+       - No considerar viewports pequeños
+       - Usar fixed para elementos temporales
+       - Olvidar el impacto en la accesibilidad */
+}
+
+
+/* ==========================================================================
+   5. POSITION: STICKY
+   ========================================================================== */
+.sticky {
+    background-color: lightblue;
+    position: sticky;
+    top: 50px;
+
+    /* ¿QUÉ ES?
+       Posicionamiento híbrido que cambia entre relative y fixed
+       
+       ✅ ÚSALO CUANDO:
+       - Necesites encabezados que se mantengan visibles
+       - Quieras navegación que se fije al scroll
+       - Implementes índices de contenido
+       
+       ❌ NO LO USES CUANDO:
+       - El navegador no lo soporte (IE11)
+       - El contenedor no tenga scroll
+       - No tengas un punto de anclaje claro
+       
+       ⚠️ REQUISITOS:
+       1. El contenedor padre debe:
+          - Tener altura definida
+          - Permitir scroll
+          - No tener overflow: hidden
+       2. Debe especificarse al menos una propiedad:
+          top, right, bottom o left
+       
+       🔍 ERRORES COMUNES:
+       - No proporcionar un contenedor adecuado
+       - Olvidar especificar el punto de adhesión
+       - Usar en contenedores sin scroll */
+}
+
+.sticky-parent {
+    border: thin dashed black;
+    height: 600px;          /* Necesario para sticky */
+}
+
+.sticky-child {
+    background-color: lightgray;
+    position: sticky;
+    top: 75px;
+}
+
+
+/* ==========================================================================
+   CONSIDERACIONES DE RENDIMIENTO Y ACCESIBILIDAD
+   ========================================================================== 
+
+   🚀 RENDIMIENTO:
+   1. Position: relative
+      - Causa reflow en el elemento y sus hijos
+      - Evitar en animaciones frecuentes
+   
+   2. Position: absolute/fixed
+      - Menor impacto en el layout
+      - Mejor para animaciones
+   
+   3. Position: sticky
+      - Requiere cálculos en cada scroll
+      - Usar con moderación
+
+   ♿ ACCESIBILIDAD:
+   1. Fixed/Sticky
+      - Asegurar que no oculten contenido importante
+      - Proporcionar manera de cerrar/ocultar
+   
+   2. Absolute
+      - Mantener orden lógico en HTML
+      - Cuidado con superposiciones
+   
+   📱 RESPONSIVE:
+   1. Fixed
+      - Considerar teclados virtuales
+      - Adaptar tamaños para móviles
+   
+   2. Absolute
+      - Puede necesitar media queries
+      - Considerar diferentes tamaños de pantalla
+   
+   3. Sticky
+      - Verificar comportamiento en diferentes dispositivos
+      - Ajustar puntos de adhesión según viewport */ 
+
+
+/* ======================================================================
+   Z-INDEX: GUÍA COMPLETA
+   De principiante a experto
+   ====================================================================== */
+
+/* SECCIÓN 1: CONCEPTOS BÁSICOS
+   ====================================================================== */
+
+/* 
+ * ¿Qué es z-index?
+ * ----------------
+ * Es una propiedad CSS que controla la profundidad visual de los elementos posicionados,
+ * determinando cuál aparece delante o detrás de otros elementos.
+ *
+ * Valores permitidos:
+ * ------------------
+ * - auto (valor por defecto)
+ * - Números enteros (positivos o negativos)
+ * - initial (vuelve al valor inicial)
+ * - inherit (hereda el valor del padre)
+ */
+
+/* Ejemplo básico de superposición */
+.z-index-1,
+.z-index-2 {
+    background-color: mediumaquamarine;
+    border: thin solid black;
+    position: relative;  /* ¡IMPORTANTE! z-index solo funciona con elementos posicionados */
+    width: 200px;
+    height: 200px;
+}
+
+/* Primer elemento con z-index bajo */
+.z-index-1 {
+    z-index: 1;    /* Este elemento estará detrás */
+}
+
+/* Segundo elemento con z-index alto */
+.z-index-2 {
+    top: -200px;   /* Posicionamiento para crear superposición */
+    left: 100px;
+    z-index: 2;    /* Este elemento estará delante */
+}
+
+/* SECCIÓN 2: CONTEXTOS DE APILAMIENTO Y ELEMENTOS PADRE-HIJO
+   ====================================================================== */
+
+/* 
+ * CONCEPTO CLAVE: Contexto de Apilamiento
+ * --------------------------------------
+ * Un contexto de apilamiento es como una "capa" independiente donde los z-index
+ * funcionan de manera aislada. Se crea cuando:
+ * 1. El elemento raíz (html)
+ * 2. position: relative/absolute con z-index ≠ auto
+ * 3. position: fixed o sticky
+ * 4. opacity < 1
+ * 5. transform, filter, perspective, clip-path, mask, etc.
+ */
+
+/* Ejemplo de contexto padre-hijo */
+.z-index-parent {
+    background-color: mediumorchid;
+    width: 300px;
+    height: 300px;
+    position: relative;
+    /* z-index: 2; */  /* IMPORTANTE: Comentado para demostrar comportamiento por defecto */
+}
+
+.z-index-child {
+    background-color: mediumvioletred;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    top: -75px;
+    left: 75px;
+    z-index: -3;    /* Valor negativo para demostrar comportamiento con padre */
+}
+
+/* SECCIÓN 3: CASOS PRÁCTICOS Y SITUACIONES REALES
+   ====================================================================== */
+
+/* Ejemplo: Menú desplegable */
+.menu-dropdown {
+    position: relative;
+    z-index: 100;    /* Valor alto para asegurar visibilidad */
+}
+
+.submenu {
+    position: absolute;
+    z-index: 101;    /* Mayor que el padre para garantizar que aparezca encima */
+    display: none;    /* Oculto por defecto */
+}
+
+.menu-dropdown:hover .submenu {
+    display: block;   /* Se muestra al hacer hover */
+}
+
+/* Ejemplo: Modal con overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: fixed;
+    z-index: 1001;   /* Mayor que el overlay */
+}
+
+/* SECCIÓN 4: PROBLEMAS COMUNES Y SOLUCIONES
+   ====================================================================== */
+
+/* Problema 1: Z-index no funciona */
+.no-funciona {
+    z-index: 999;    /* ❌ No funcionará sin position */
+}
+
+/* Solución */
+.si-funciona {
+    position: relative;
+    z-index: 999;    /* ✅ Ahora sí funcionará */
+}
+
+/* Problema 2: Elemento hijo no se muestra detrás del padre */
+.padre-problema {
+    position: relative;
+    /* Sin z-index definido */
+}
+
+.hijo-problema {
+    position: relative;
+    z-index: -1;     /* ❌ No se mostrará detrás sin z-index en el padre */
+}
+
+/* Solución */
+.padre-solucion {
+    position: relative;
+    z-index: 0;      /* ✅ Ahora el hijo con z-index negativo sí se mostrará detrás */
+}
+
+/* SECCIÓN 5: BUENAS PRÁCTICAS Y SISTEMA DE CAPAS
+   ====================================================================== */
+
+/* 
+ * Sistema de capas organizado:
+ * ---------------------------
+ * 1-10: Elementos base
+ * 11-20: Navegación
+ * 21-30: Dropdowns
+ * 31-40: Tooltips
+ * 41-50: Modales
+ * 51-60: Notificaciones
+ */
+
+:root {
+    /* Variables CSS para manejo consistente de z-index */
+    --z-base: 1;
+    --z-nav: 10;
+    --z-dropdown: 20;
+    --z-tooltip: 30;
+    --z-modal: 40;
+    --z-notification: 50;
+}
+
+/* Ejemplo de uso del sistema de capas */
+.base-content {
+    position: relative;
+    z-index: var(--z-base);
+}
+
+.main-nav {
+    position: relative;
+    z-index: var(--z-nav);
+}
+
+/* SECCIÓN 6: EJEMPLOS AVANZADOS
+   ====================================================================== */
+
+/* Ejemplo: Capas múltiples con superposición compleja */
+.capa-base {
+    position: relative;
+    z-index: var(--z-base);
+}
+
+.capa-media {
+    position: absolute;
+    z-index: calc(var(--z-base) + 5);  /* Uso de calc() para z-index dinámico */
+}
+
+.capa-superior {
+    position: absolute;
+    z-index: calc(var(--z-base) + 10);
+}
+
+/* Ejemplo: Manejo de z-index en componentes anidados */
+.componente-padre {
+    position: relative;
+    z-index: 0;
+}
+
+.componente-hijo {
+    position: relative;
+    /* Hereda contexto del padre pero mantiene su propio subcontexto */
+    z-index: 1;
+}
+
+.componente-nieto {
+    position: absolute;
+    /* z-index relativo al contexto del hijo */
+    z-index: -1;
+}
+
+/* 
+ * NOTAS IMPORTANTES:
+ * -----------------
+ * 1. Siempre usar position con z-index
+ * 2. Evitar valores muy altos (max: 999)
+ * 3. Usar sistema de capas consistente
+ * 4. Documentar valores especiales
+ * 5. Considerar contextos de apilamiento
+ */
+

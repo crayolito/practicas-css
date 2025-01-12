@@ -24,14 +24,14 @@
    1. CONTENT (CONTENIDO) - El núcleo del elemento
    ========================================================================== */
 h1 {
-  /* El contenido es donde se coloca el texto, imágenes u otros elementos
+   /* El contenido es donde se coloca el texto, imágenes u otros elementos
        Es el punto de partida para todos los cálculos de dimensiones */
-  width: 400px;
-  /* Ancho base del contenido */
-  height: 200px;
-  /* Alto base del contenido */
+   width: 400px;
+   /* Ancho base del contenido */
+   height: 200px;
+   /* Alto base del contenido */
 
-  /* Estas dimensiones son la base para el cálculo del tamaño total.
+   /* Estas dimensiones son la base para el cálculo del tamaño total.
        Si usamos box-sizing: content-box (valor por defecto),
        padding y border se añadirán a estas dimensiones */
 }
@@ -40,26 +40,26 @@ h1 {
    2. BORDER (BORDE) - El límite visible del elemento
    ========================================================================== */
 h1 {
-  /* El borde es la línea visible que delimita el elemento
+   /* El borde es la línea visible que delimita el elemento
        Podemos controlar cada aspecto individualmente: */
-  border-color: green;
-  /* Color base para todos los bordes */
-  border-top-color: red;
-  /* Solo cambia el color del borde superior */
+   border-color: green;
+   /* Color base para todos los bordes */
+   border-top-color: red;
+   /* Solo cambia el color del borde superior */
 
-  /* Grosores predefinidos del borde:
+   /* Grosores predefinidos del borde:
        thick  = 5px (grueso)
        medium = 3px (medio)
        thin   = 1px (fino) */
-  border-width: thick;
+   border-width: thick;
 
-  border-style: solid;
-  /* Estilo de línea: solid, dashed, dotted, etc. */
+   border-style: solid;
+   /* Estilo de línea: solid, dashed, dotted, etc. */
 
-  /* La forma más común y práctica es usar el shorthand border
+   /* La forma más común y práctica es usar el shorthand border
        que combina: grosor estilo color en ese orden */
-  border: 2px dashed blue;
-  /* Una línea punteada azul de 2px */
+   border: 2px dashed blue;
+   /* Una línea punteada azul de 2px */
 }
 
 /* ==========================================================================
@@ -67,41 +67,41 @@ h1 {
    ========================================================================== */
 .caja-uno,
 .caja-dos {
-  /* Estilos base que definen la apariencia visual */
-  background-color: chocolate;
-  /* Color de fondo marrón chocolate */
-  border: medium solid orange;
-  /* Borde naranja de 3px (medium) */
+   /* Estilos base que definen la apariencia visual */
+   background-color: chocolate;
+   /* Color de fondo marrón chocolate */
+   border: medium solid orange;
+   /* Borde naranja de 3px (medium) */
 
-  /* GUÍA COMPLETA DE SHORTHAND PARA PADDING Y MARGIN
+   /* GUÍA COMPLETA DE SHORTHAND PARA PADDING Y MARGIN
        Estas propiedades siguen reglas específicas según
        el número de valores que proporcionemos: */
 
-  /* 1. Un valor: se aplica a todos los lados por igual */
-  padding: 20px;
-  /* 20px de relleno en todos los lados */
-  margin: 20px;
-  /* 20px de margen en todos los lados */
+   /* 1. Un valor: se aplica a todos los lados por igual */
+   padding: 20px;
+   /* 20px de relleno en todos los lados */
+   margin: 20px;
+   /* 20px de margen en todos los lados */
 
-  /* 2. Dos valores: el primer valor es para arriba/abajo (eje vertical)
+   /* 2. Dos valores: el primer valor es para arriba/abajo (eje vertical)
           el segundo es para izquierda/derecha (eje horizontal) */
-  padding: 20px 40px;
-  /* vertical: 20px, horizontal: 40px */
-  margin: 40px 20px;
-  /* vertical: 40px, horizontal: 20px */
+   padding: 20px 40px;
+   /* vertical: 20px, horizontal: 40px */
+   margin: 40px 20px;
+   /* vertical: 40px, horizontal: 20px */
 
-  /* 3. Tres valores: siguen el orden top | horizontal | bottom */
-  padding: 0 40px 20px;
-  /* arriba: 0, horizontal: 40px, abajo: 20px */
-  margin: 50px 30px 0;
-  /* arriba: 50px, horizontal: 30px, abajo: 0 */
+   /* 3. Tres valores: siguen el orden top | horizontal | bottom */
+   padding: 0 40px 20px;
+   /* arriba: 0, horizontal: 40px, abajo: 20px */
+   margin: 50px 30px 0;
+   /* arriba: 50px, horizontal: 30px, abajo: 0 */
 
-  /* 4. Cuatro valores: siguen el orden de las agujas del reloj
+   /* 4. Cuatro valores: siguen el orden de las agujas del reloj
           empezando desde arriba: top → right → bottom → left */
-  padding: 20px 40px 30px 10px;
-  /* Cada lado tiene su valor específico */
-  margin: 50px 30px 0 10px;
-  /* Valores individuales para cada lado */
+   padding: 20px 40px 30px 10px;
+   /* Cada lado tiene su valor específico */
+   margin: 50px 30px 0 10px;
+   /* Valores individuales para cada lado */
 }
 
 /* ==========================================================================
@@ -187,35 +187,35 @@ Ejemplos de elementos block:
    ========================================================================== */
 .caja-linea,
 .caja-bloque {
-  /* Estilos visuales compartidos */
-  background-color: darkcyan;
-  /* Fondo verde azulado */
-  color: white;
-  /* Texto blanco */
+   /* Estilos visuales compartidos */
+   background-color: darkcyan;
+   /* Fondo verde azulado */
+   color: white;
+   /* Texto blanco */
 
-  /* Dimensiones base - Nota: solo funcionarán en .caja-bloque */
-  width: 500px;
-  /* Ancho fijo - ignorado en inline */
-  height: 250px;
-  /* Alto fijo - ignorado en inline */
+   /* Dimensiones base - Nota: solo funcionarán en .caja-bloque */
+   width: 500px;
+   /* Ancho fijo - ignorado en inline */
+   height: 250px;
+   /* Alto fijo - ignorado en inline */
 
-  /* Bordes y espaciado */
-  border: medium solid black;
-  /* Borde negro de grosor medio */
-  padding: 16px;
-  /* Relleno interior de 16px */
+   /* Bordes y espaciado */
+   border: medium solid black;
+   /* Borde negro de grosor medio */
+   padding: 16px;
+   /* Relleno interior de 16px */
 }
 
 /* Estilos específicos para caja de bloque */
 .caja-bloque {
-  margin: 32px;
-  /* Margen en todas direcciones */
+   margin: 32px;
+   /* Margen en todas direcciones */
 }
 
 /* Estilos específicos para caja en línea */
 .caja-linea {
-  margin: 48px;
-  /* Solo afectará horizontalmente */
+   margin: 48px;
+   /* Solo afectará horizontalmente */
 }
 
 /* ==========================================================================
@@ -324,35 +324,35 @@ display: grid
 .caja-none,
 .caja-linea-bloque,
 .caja-hidden {
-  /* Estilos base compartidos */
-  background-color: darkolivegreen;
-  /* Fondo verde oliva oscuro */
-  color: wheat;
-  /* Texto color trigo */
-  width: 600px;
-  /* Ancho fijo */
-  height: 300px;
-  /* Alto fijo */
-  border: medium solid black;
-  /* Borde negro medio */
+   /* Estilos base compartidos */
+   background-color: darkolivegreen;
+   /* Fondo verde oliva oscuro */
+   color: wheat;
+   /* Texto color trigo */
+   width: 600px;
+   /* Ancho fijo */
+   height: 300px;
+   /* Alto fijo */
+   border: medium solid black;
+   /* Borde negro medio */
 }
 
 /* Display inline-block: híbrido entre inline y block */
 .caja-linea-bloque {
-  display: inline-block;
-  /* Permite dimensiones manteniendo flujo en línea */
+   display: inline-block;
+   /* Permite dimensiones manteniendo flujo en línea */
 }
 
 /* Display none: remueve completamente del flujo */
 .caja-none {
-  display: none;
-  /* Elemento no visible y sin espacio */
+   display: none;
+   /* Elemento no visible y sin espacio */
 }
 
 /* Visibility hidden: oculta pero mantiene espacio */
 .caja-hidden {
-  visibility: hidden;
-  /* Elemento invisible pero mantiene su espacio */
+   visibility: hidden;
+   /* Elemento invisible pero mantiene su espacio */
 }
 
 /* ==========================================================================
@@ -424,39 +424,39 @@ display: none vs visibility: hidden
    EJEMPLO PRÁCTICO DE OVERFLOW
    ========================================================================== */
 .overflow {
-  /* Estilos base del contenedor */
-  background-color: darkcyan;
-  /* Color de fondo verde azulado */
-  width: 200px;
-  /* Ancho fijo del contenedor */
-  height: 100px;
-  /* Alto fijo del contenedor */
+   /* Estilos base del contenedor */
+   background-color: darkcyan;
+   /* Color de fondo verde azulado */
+   width: 200px;
+   /* Ancho fijo del contenedor */
+   height: 100px;
+   /* Alto fijo del contenedor */
 
-  /* Diferentes valores de overflow: */
+   /* Diferentes valores de overflow: */
 
-  /* 1. visible (valor por defecto) */
-  overflow: visible;
-  /* El contenido excedente es visible
+   /* 1. visible (valor por defecto) */
+   overflow: visible;
+   /* El contenido excedente es visible
                                      fuera del contenedor */
 
-  /* 2. hidden */
-  overflow: hidden;
-  /* Oculta todo el contenido que
+   /* 2. hidden */
+   overflow: hidden;
+   /* Oculta todo el contenido que
                                      sobrepase los límites */
 
-  /* 3. scroll */
-  overflow: scroll;
-  /* Siempre muestra barras de scroll,
+   /* 3. scroll */
+   overflow: scroll;
+   /* Siempre muestra barras de scroll,
                                      aunque no sean necesarias */
 
-  /* 4. auto */
-  overflow: auto;
-  /* Muestra barras de scroll solo
+   /* 4. auto */
+   overflow: auto;
+   /* Muestra barras de scroll solo
                                      cuando son necesarias */
 
-  /* Control independiente por eje */
-  /* overflow-y: scroll;            Scroll solo vertical */
-  /* overflow-x: scroll;            Scroll solo horizontal */
+   /* Control independiente por eje */
+   /* overflow-y: scroll;            Scroll solo vertical */
+   /* overflow-x: scroll;            Scroll solo horizontal */
 }
 
 /* ==========================================================================
@@ -575,15 +575,21 @@ Casos comunes:
    EJEMPLO 1: LA DIFERENCIA ENTRE CONTENT-BOX Y BORDER-BOX
    ========================================================================== */
 .box-sizing-border {
-  /* Versión tradicional (content-box) */
-  background-color: deepskyblue; /* Color de fondo para visualizar */
-  box-sizing: content-box; /* Modo tradicional */
-  width: 500px; /* Solo el contenido mide 500px */
-  height: 250px; /* Solo el contenido mide 250px */
-  padding: 10px; /* Relleno que SE SUMA al tamaño */
-  border: thick solid black; /* Borde que SE SUMA al tamaño */
+   /* Versión tradicional (content-box) */
+   background-color: deepskyblue;
+   /* Color de fondo para visualizar */
+   box-sizing: content-box;
+   /* Modo tradicional */
+   width: 500px;
+   /* Solo el contenido mide 500px */
+   height: 250px;
+   /* Solo el contenido mide 250px */
+   padding: 10px;
+   /* Relleno que SE SUMA al tamaño */
+   border: thick solid black;
+   /* Borde que SE SUMA al tamaño */
 
-  /* 👉 ¡IMPORTANTE! Con content-box:
+   /* 👉 ¡IMPORTANTE! Con content-box:
        - Es como pedir una pizza de 30cm y que te llegue en una caja de 35cm
        - El tamaño final será MAYOR que el especificado
        
@@ -594,9 +600,10 @@ Casos comunes:
 
 /* Versión moderna (border-box) */
 .box-sizing-border {
-  box-sizing: border-box; /* Modo moderno */
+   box-sizing: border-box;
+   /* Modo moderno */
 
-  /* 👉 Ahora con border-box:
+   /* 👉 Ahora con border-box:
        - Es como pedir una caja de 500px y que TODO quepa dentro
        - El contenido se ajusta automáticamente más pequeño
        - El tamaño final es EXACTAMENTE 500px x 250px */
@@ -607,21 +614,29 @@ Casos comunes:
    ========================================================================== */
 /* El contenedor principal */
 .container-col-3 {
-  background: burlywood; /* Color para ver el contenedor */
-  width: 600px; /* Ancho total disponible */
-  height: 300px; /* Alto total disponible */
-  margin-top: 20px; /* Espacio arriba */
+   background: burlywood;
+   /* Color para ver el contenedor */
+   width: 600px;
+   /* Ancho total disponible */
+   height: 300px;
+   /* Alto total disponible */
+   margin-top: 20px;
+   /* Espacio arriba */
 }
 
 /* Las columnas dentro del contenedor */
-.container-col-3 > * {
-  /* Esto aplica a todos los elementos dentro del contenedor */
-  box-sizing: border-box; /* Usar el modo moderno */
-  width: 200px; /* Cada columna ocupará 200px TOTAL */
-  border: thin solid red; /* Borde para ver los límites */
-  padding: 10px; /* Espacio interno */
+.container-col-3>* {
+   /* Esto aplica a todos los elementos dentro del contenedor */
+   box-sizing: border-box;
+   /* Usar el modo moderno */
+   width: 200px;
+   /* Cada columna ocupará 200px TOTAL */
+   border: thin solid red;
+   /* Borde para ver los límites */
+   padding: 10px;
+   /* Espacio interno */
 
-  /* 👉 ¿Por qué es esto inteligente?
+   /* 👉 ¿Por qué es esto inteligente?
        - El contenedor tiene 600px
        - Queremos 3 columnas iguales
        - 600px ÷ 3 = 200px por columna
@@ -633,14 +648,16 @@ Casos comunes:
    ========================================================================== */
 /* Paso 1: Establecer la regla base en el HTML */
 html {
-  box-sizing: border-box; /* Todos usarán border-box por defecto */
+   box-sizing: border-box;
+   /* Todos usarán border-box por defecto */
 }
 
 /* Paso 2: Hacer que TODO herede esta regla */
 *,
 *:before,
 *:after {
-  box-sizing: inherit; /* Heredar el comportamiento de border-box */
+   box-sizing: inherit;
+   /* Heredar el comportamiento de border-box */
 }
 
 /* 👉 ¿Por qué es esto genial?
@@ -683,9 +700,10 @@ html {
    1. EL CONTENEDOR PRINCIPAL
    ========================================================================== */
 .container-floats {
-  background-color: cornflowerblue; /* Color de fondo azul */
+   background-color: cornflowerblue;
+   /* Color de fondo azul */
 
-  /* 👉 ¿Por qué necesitamos un contenedor?
+   /* 👉 ¿Por qué necesitamos un contenedor?
        - Es como una piscina donde los elementos flotan
        - Ayuda a mantener los elementos flotantes organizados
        - Sin él, los elementos podrían "derramarse" por la página */
@@ -695,9 +713,10 @@ html {
    2. FLOAT LEFT (FLOTAR A LA IZQUIERDA)
    ========================================================================== */
 .float-left {
-  float: left; /* El elemento flota a la izquierda */
+   float: left;
+   /* El elemento flota a la izquierda */
 
-  /* 👉 ¿Qué hace float: left?
+   /* 👉 ¿Qué hace float: left?
        - Imagina empujar un objeto al lado izquierdo de la piscina
        - Otros elementos intentarán flotar a su derecha
        - El elemento sale del flujo normal del documento
@@ -712,9 +731,10 @@ html {
    3. FLOAT RIGHT (FLOTAR A LA DERECHA)
    ========================================================================== */
 .float-right {
-  float: right; /* El elemento flota a la derecha */
+   float: right;
+   /* El elemento flota a la derecha */
 
-  /* 👉 ¿Qué hace float: right?
+   /* 👉 ¿Qué hace float: right?
        - Como empujar un objeto al lado derecho de la piscina
        - Otros elementos intentarán flotar a su izquierda
        - También sale del flujo normal
@@ -729,9 +749,10 @@ html {
    4. CLEARFIX (LIMPIAR FLOTANTES)
    ========================================================================== */
 .clearfix {
-  clear: both; /* Limpia flotantes en ambos lados */
+   clear: both;
+   /* Limpia flotantes en ambos lados */
 
-  /* 👉 ¿Por qué necesitamos clear?
+   /* 👉 ¿Por qué necesitamos clear?
        - Es como poner una barrera en la piscina
        - Evita que los elementos floten cerca
        - Ayuda a mantener el diseño ordenado
@@ -817,18 +838,21 @@ html {
    EJEMPLO PRÁCTICO
    ========================================================================== */
 .margin-collapse {
-  background-color: skyblue; /* Color de fondo para visualizar */
+   background-color: skyblue;
+   /* Color de fondo para visualizar */
 
-  /* 👉 El contenedor tiene fondo para que podamos ver su comportamiento
+   /* 👉 El contenedor tiene fondo para que podamos ver su comportamiento
        - Sin el fondo, sería difícil ver dónde empieza y termina
        - El contenedor también puede participar en el colapso */
 }
 
 .margin-collapse section {
-  border: thin solid black; /* Borde fino para ver los límites */
-  margin-top: 16px; /* Margen superior de 16px */
+   border: thin solid black;
+   /* Borde fino para ver los límites */
+   margin-top: 16px;
+   /* Margen superior de 16px */
 
-  /* 🎯 ¿Qué está pasando aquí?
+   /* 🎯 ¿Qué está pasando aquí?
        1. Cada section tiene un margen superior de 16px
        2. Cuando dos sections se encuentran, sus márgenes colapsan
        3. En lugar de tener 32px entre ellos (16px + 16px)
@@ -927,15 +951,19 @@ html {
    1. MÁRGENES EN ELEMENTOS DE BLOQUE
    ========================================================================== */
 .margin-collapse {
-  background-color: skyblue; /* Fondo azul claro para visualizar */
+   background-color: skyblue;
+   /* Fondo azul claro para visualizar */
 }
 
 .margin-collapse section {
-  border: thin solid black; /* Borde para ver los límites */
-  margin-top: 16px; /* Espacio arriba */
-  margin-bottom: 16px; /* Espacio abajo */
+   border: thin solid black;
+   /* Borde para ver los límites */
+   margin-top: 16px;
+   /* Espacio arriba */
+   margin-bottom: 16px;
+   /* Espacio abajo */
 
-  /* 👉 ¿Qué sucede aquí?
+   /* 👉 ¿Qué sucede aquí?
        Si tenemos dos sections seguidos:
        
        ┌─── Section 1 ───┐
@@ -954,12 +982,16 @@ html {
    2. MÁRGENES EN ELEMENTOS EN LÍNEA
    ========================================================================== */
 .margin-collapse span {
-  border: thin solid black; /* Borde para ver los límites */
-  display: inline-block; /* Permite márgenes horizontales */
-  margin-right: 16px; /* Espacio a la derecha */
-  margin-left: 16px; /* Espacio a la izquierda */
+   border: thin solid black;
+   /* Borde para ver los límites */
+   display: inline-block;
+   /* Permite márgenes horizontales */
+   margin-right: 16px;
+   /* Espacio a la derecha */
+   margin-left: 16px;
+   /* Espacio a la izquierda */
 
-  /* 👉 ¿Qué es diferente aquí?
+   /* 👉 ¿Qué es diferente aquí?
        
        [Span 1] 16px [Span 2] 16px [Span 3]
        
@@ -984,26 +1016,35 @@ html {
    3. TÉCNICA DE CENTRADO AUTOMÁTICO
    ========================================================================== */
 .sitio-web {
-  /* Estilo visual */
-  border: thin solid black; /* Borde para ver los límites */
-  background-color: thistle; /* Color morado claro */
+   /* Estilo visual */
+   border: thin solid black;
+   /* Borde para ver los límites */
+   background-color: thistle;
+   /* Color morado claro */
 
-  /* Dimensiones de la caja */
-  width: 800px; /* Ancho fijo necesario */
-  height: 1000px; /* Alto de la caja */
-  padding: 16px; /* Espacio interno */
+   /* Dimensiones de la caja */
+   width: 800px;
+   /* Ancho fijo necesario */
+   height: 1000px;
+   /* Alto de la caja */
+   padding: 16px;
+   /* Espacio interno */
 
-  /* ⭐ El truco del centrado ⭐ */
-  margin-left: auto; /* Margen automático izquierdo */
-  margin-right: auto; /* Margen automático derecho */
+   /* ⭐ El truco del centrado ⭐ */
+   margin-left: auto;
+   /* Margen automático izquierdo */
+   margin-right: auto;
+   /* Margen automático derecho */
 
-  /* Espacio superior manual */
-  margin-top: 200px; /* Espacio desde arriba */
+   /* Espacio superior manual */
+   margin-top: 200px;
+   /* Espacio desde arriba */
 
-  /* Centrado del contenido interno */
-  text-align: center; /* Centra el texto dentro */
+   /* Centrado del contenido interno */
+   text-align: center;
+   /* Centra el texto dentro */
 
-  /* 👉 ¿Cómo funciona?
+   /* 👉 ¿Cómo funciona?
        
        ┌─────── Ventana del navegador ───────┐
        │                                     │
@@ -1049,36 +1090,5 @@ html {
       - Usa las herramientas del navegador para depurar */
 
 
-Posicionamiento CSS 
 
-Las propiedades FLOAT y POSITION nos permiten modificar la posicion natural de cualquier
-elemento del documento html
 
-El navegador coloca cada elemento teniendo en cuenta el orden en el que aparecen en el 
-doducmento y su tipo de visualizacion si es un elemento de linea o de blockquote
-
-Con Float y Position podemos modificar este comportamiento
-
-Elementos Flotantes
-- float : Convierte un elemento en flotante desplazandolo hasta la zona mas a ala 
-izquierda o mas a la derecha de la posicion en al que originalmente se encontraba.
-- clear : Limpia la flotacion (left, right, both)
-
-Tipos de Posicionamiento
-- static (default)
-- relative
-- absolute
-- fixed
-- sticky
-
-Para mover los elementos posiconados se activan las propiedades :
-- top (vertical - eje Y)
-- bottom (vertical - eje Y)
-- left (horizontal - eje X)
-- right (horizontal - eje X)
-- z-index (profundidad eje Z)
-
-Las propiedades de top y eft van a tener preferencia por sobre botton y right
-repectivamente 
-
-Estas 5 propiedades no funcionana con el valor de static
